@@ -1,10 +1,28 @@
 package view;
 
-public class FornecedorView extends javax.swing.JInternalFrame {
+import dao.FornecedorDAO;
+import java.util.List;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import model.Fornecedor;
 
+public class FornecedorView extends javax.swing.JInternalFrame {
+    Fornecedor fornecedor;
+    FornecedorDAO fornecedorDAO;
+    List<Fornecedor> listaFornecedor;
+    
     public FornecedorView() {
+        fornecedorDAO = new FornecedorDAO();
+        listaFornecedor = new ArrayList<>();
         initComponents();
         this.setVisible(true);
+        atualizarTabelaFornecedor();
     }
 
     @SuppressWarnings("unchecked")
@@ -71,6 +89,11 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         btnGravar.setText("Gravar");
         btnGravar.setEnabled(false);
         btnGravar.setPreferredSize(new java.awt.Dimension(75, 30));
+        btnGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGravarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("CNPJ");
 
@@ -219,7 +242,95 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public void atualizarTabelaFornecedor() {
+        fornecedor = new Fornecedor();
+        try{
+            listaFornecedor = fornecedorDAO.listaFornecedor();
+        } catch (SQLException ex){
+            Logger.getLogger(FornecedorView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+            String dados[][] = new String[listaFornecedor.size()][5];
+            int i = 0;
+            for (Fornecedor cliente : listaFornecedor){
+                dados[i][0] = String.valueOf(cliente.getCodigoFornecedor());
+                //dados[i][1] = cliente.getNomeFornecedor();
+                //dados[i][2] = cliente.getEnderecoFornecedor();
+                dados[i][1] = cliente.getNomeFornecedor();
+                dados[i][2] = String.valueOf(cliente.getCnpjFornecedor());
+                dados[i][3] = String.valueOf(cliente.getTelefoneFornecedor());
+                dados[i][4] = cliente.getCidadeFornecedor();
+                i++;
+            }
+            
+            String tituloColuna[] = {"ID", "Nome", "CNPJ", "Telefone", "Cidade"};
+            DefaultTableModel tabelaCliente = new DefaultTableModel();
+            tabelaCliente.setDataVector(dados, tituloColuna);
+            tblFornecedor.setModel(new DefaultTableModel(dados, tituloColuna){
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false, false
+                };
+                
+                public boolean isCellEditable(int rowIndex, int ColumnIndex){
+                    return canEdit[ColumnIndex];
+                }
+            });
+            
+            tblFornecedor.getColumnModel().getColumn(0).setPreferredWidth(20);
+            tblFornecedor.getColumnModel().getColumn(1).setPreferredWidth(150);
+            tblFornecedor.getColumnModel().getColumn(2).setPreferredWidth(150);
+            tblFornecedor.getColumnModel().getColumn(3).setPreferredWidth(80);
+            tblFornecedor.getColumnModel().getColumn(4).setPreferredWidth(100);
+            
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tblFornecedor.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblFornecedor.setRowHeight(25);
+            tblFornecedor.updateUI();   
+    }
     
+    private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
+        if (txtNome.getText().isEmpty() || txtEndereco.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Preenche todos os campos");
+            txtNome.requestFocusInWindow();
+            
+        } else if (txtCodigo.getText().isEmpty()){
+            fornecedor = new Fornecedor();
+            fornecedor.setNomeFornecedor(txtNome.getText());
+            fornecedor.setCnpjFornecedor(Integer.parseInt(txtCNPJ.getText()));
+            fornecedor.setEnderecoFornecedor(txtEndereco.getText());
+            fornecedor.setCidadeFornecedor(txtCidade.getText());
+            fornecedor.setTelefoneFornecedor(Integer.parseInt(txtTelefone.getText()));
+            fornecedor.setEmailFornecedor(txtEmail.getText());
+            
+            try {
+                fornecedorDAO.salvar(fornecedor);
+            } catch (SQLException ex){
+                Logger.getLogger(FornecedorView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            JOptionPane.showMessageDialog(null, "Gravado com sucesso.");
+            atualizarTabelaFornecedor();
+            
+        } else {
+            fornecedor = new Fornecedor();
+            fornecedor.setNomeFornecedor(txtNome.getText());
+            fornecedor.setCnpjFornecedor(Integer.parseInt(txtCNPJ.getText()));
+            fornecedor.setEnderecoFornecedor(txtEndereco.getText());
+            fornecedor.setCidadeFornecedor(txtCidade.getText());
+            fornecedor.setTelefoneFornecedor(Integer.parseInt(txtTelefone.getText()));
+            fornecedor.setEmailFornecedor(txtEmail.getText());
+            
+            try {
+                fornecedorDAO.salvar(fornecedor);
+            } catch (SQLException ex){
+                Logger.getLogger(FornecedorView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            JOptionPane.showMessageDialog(null, "Gravado com sucesso.");
+            atualizarTabelaFornecedor();
+        }
+    }//GEN-LAST:event_btnGravarActionPerformed
+      
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnCancelar;

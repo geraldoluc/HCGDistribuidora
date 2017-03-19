@@ -40,6 +40,11 @@ public class Principal extends javax.swing.JFrame {
         mnuArquivo.setText("Fornecedores");
 
         mniFornecedor.setText("Controle");
+        mniFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniFornecedorActionPerformed(evt);
+            }
+        });
         mnuArquivo.add(mniFornecedor);
 
         jMenuBar1.add(mnuArquivo);
@@ -47,9 +52,19 @@ public class Principal extends javax.swing.JFrame {
         jMenu1.setText("Estoque");
 
         mniCadastroEstoque.setText("Cadastro");
+        mniCadastroEstoque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniCadastroEstoqueActionPerformed(evt);
+            }
+        });
         jMenu1.add(mniCadastroEstoque);
 
         mniConsultaEstoque.setText("Consulta");
+        mniConsultaEstoque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniConsultaEstoqueActionPerformed(evt);
+            }
+        });
         jMenu1.add(mniConsultaEstoque);
 
         jMenuBar1.add(jMenu1);
@@ -92,6 +107,26 @@ public class Principal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_mniSairActionPerformed
 
+    private void mniFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniFornecedorActionPerformed
+        FornecedorView fornecedor = new FornecedorView();
+        pnl_principal.removeAll();
+        pnl_principal.add(fornecedor);
+        pnl_principal.updateUI();
+    }//GEN-LAST:event_mniFornecedorActionPerformed
+
+    private void mniCadastroEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCadastroEstoqueActionPerformed
+        CadastroEstoqueView cadastro = new CadastroEstoqueView();
+        pnl_principal.removeAll();
+        pnl_principal.add(cadastro);
+        pnl_principal.updateUI();
+    }//GEN-LAST:event_mniCadastroEstoqueActionPerformed
+
+    private void mniConsultaEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniConsultaEstoqueActionPerformed
+        ConsultaEstoqueView consulta = new ConsultaEstoqueView();
+        pnl_principal.removeAll();
+        pnl_principal.add(consulta);
+        pnl_principal.updateUI();
+    }//GEN-LAST:event_mniConsultaEstoqueActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;

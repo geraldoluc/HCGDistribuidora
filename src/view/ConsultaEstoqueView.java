@@ -1,13 +1,86 @@
 package view;
 
+import dao.EstoqueDAO;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import model.Estoque;
+
 public class ConsultaEstoqueView extends javax.swing.JInternalFrame {
+    Estoque estoque;
+    EstoqueDAO estoqueDAO;
+    List<Estoque> listaEstoque;
+    boolean aux;
     
     public ConsultaEstoqueView() {
+        estoqueDAO = new EstoqueDAO();
+        listaEstoque = new ArrayList<>();
+        initComponents();
+        this.setVisible(true);
+        
         //Botao de Grupo dos Filtros.
         btnGrupoFiltro.add(radRefrigerante);
         btnGrupoFiltro.add(radOutro);
     }
 
+    public void atualizarTabelaEstoque() {
+        estoque = new Estoque();
+        
+        try{
+            listaEstoque = estoqueDAO.listaEstoque(aux);
+        } catch (SQLException ex){
+            Logger.getLogger(FornecedorView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+            String dados[][] = new String[listaEstoque.size()][5];
+            int i = 0;
+            for (Estoque estoq : listaEstoque){
+                dados[i][0] = String.valueOf(estoq.getCodigoEstoque());
+                dados[i][1] = estoq.getDescricaoEstoque();
+                dados[i][2] = String.valueOf(estoq.isCategoriaEstoque());
+                
+                if (dados[i][2] == "false")
+                    dados[i][2] = "Refrigerante";
+                else
+                    dados[i][2] = "Outro";
+                
+                dados[i][3] = String.valueOf(estoq.getPreco_custoEstoque());
+                dados[i][4] = String.valueOf(estoq.getPreco_vendaEstoque());
+                i++;
+            }
+            
+            String tituloColuna[] = {"Código", "Descrição", "Categoria", "Preço de Custo", "Preço de Venda"};
+            DefaultTableModel tabelaCliente = new DefaultTableModel();
+            tabelaCliente.setDataVector(dados, tituloColuna);
+            tblConsultaEstoque.setModel(new DefaultTableModel(dados, tituloColuna){
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false, false
+                };
+                
+                public boolean isCellEditable(int rowIndex, int ColumnIndex){
+                    return canEdit[ColumnIndex];
+                }
+            });
+            
+            tblConsultaEstoque.getColumnModel().getColumn(0).setPreferredWidth(20);
+            tblConsultaEstoque.getColumnModel().getColumn(1).setPreferredWidth(150);
+            tblConsultaEstoque.getColumnModel().getColumn(2).setPreferredWidth(150);
+            tblConsultaEstoque.getColumnModel().getColumn(3).setPreferredWidth(80);
+            tblConsultaEstoque.getColumnModel().getColumn(4).setPreferredWidth(100);
+            
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tblConsultaEstoque.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblConsultaEstoque.setRowHeight(25);
+            tblConsultaEstoque.updateUI();   
+    }
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

@@ -1,6 +1,29 @@
 package view;
 
+import dao.EstoqueDAO;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import model.Estoque;
+
 public class CadastroEstoqueView extends javax.swing.JInternalFrame {
+    Estoque estoque;
+    EstoqueDAO estoqueDAO;
+    List<Estoque> listaEstoque;
+    
+    public CadastroEstoqueView() {
+        estoqueDAO = new EstoqueDAO();
+        listaEstoque = new ArrayList<>();
+        initComponents();
+        this.setVisible(true);
+        
+        //Botao Grupo de Categoria
+        btnGrupoCategoria.add(radRefrigerante);
+        btnGrupoCategoria.add(radOutro);
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -141,6 +164,11 @@ public class CadastroEstoqueView extends javax.swing.JInternalFrame {
         );
 
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         btnLimpar.setText("Limpar");
 
@@ -185,6 +213,46 @@ public class CadastroEstoqueView extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        //clicar botao salvar
+        if (txtDescricao.getText().isEmpty() || txtPrecoVenda.getText().isEmpty() || txtPrecoCusto.getText().isEmpty() ||
+                txtFabricante.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Por favor, preencher todos os campos.");
+        }
+        if (radRefrigerante.isSelected()){
+            estoque = new Estoque();
+            estoque.setCategoriaEstoque(false);
+            estoque.setFabricanteEstoque(txtFabricante.getText());
+            estoque.setDescricaoEstoque(txtDescricao.getText());
+            estoque.setPreco_vendaEstoque(Float.parseFloat(txtPrecoVenda.getText()));
+            estoque.setPreco_custoEstoque(Float.parseFloat(txtPrecoCusto.getText()));
+            estoque.setQuantidadeEstoque(Integer.parseInt(txtQuantidade.getText()));
+            
+            try {
+                estoqueDAO.salvar(estoque);
+            } catch (SQLException ex){
+                Logger.getLogger(FornecedorView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            JOptionPane.showMessageDialog(null, "Gravado com sucesso.");
+        }
+        else{
+            estoque = new Estoque();
+            estoque.setCategoriaEstoque(true);
+            estoque.setFabricanteEstoque(txtFabricante.getText());
+            estoque.setDescricaoEstoque(txtDescricao.getText());
+            estoque.setPreco_vendaEstoque(Float.parseFloat(txtPrecoVenda.getText()));
+            estoque.setPreco_custoEstoque(Float.parseFloat(txtPrecoCusto.getText()));
+            estoque.setQuantidadeEstoque(Integer.parseInt(txtQuantidade.getText()));
+            
+            try {
+                estoqueDAO.salvar(estoque);
+            } catch (SQLException ex){
+                Logger.getLogger(FornecedorView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            JOptionPane.showMessageDialog(null, "Gravado com sucesso.");
+        }
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btnGrupoCategoria;
