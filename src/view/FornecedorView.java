@@ -140,14 +140,29 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         btnCancelar.setText("Cancelar");
         btnCancelar.setEnabled(false);
         btnCancelar.setPreferredSize(new java.awt.Dimension(75, 30));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setText("Excluir");
         btnExcluir.setEnabled(false);
         btnExcluir.setPreferredSize(new java.awt.Dimension(75, 30));
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnAlterar.setText("Alterar");
         btnAlterar.setEnabled(false);
         btnAlterar.setPreferredSize(new java.awt.Dimension(75, 30));
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         btnNovo.setText("Novo");
         btnNovo.setPreferredSize(new java.awt.Dimension(75, 30));
@@ -311,6 +326,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
             }
             JOptionPane.showMessageDialog(null, "Gravado com sucesso.");
             atualizarTabelaFornecedor();
+            preparaSalvareCancelar();
             
         } else {
             fornecedor = new Fornecedor();
@@ -328,9 +344,89 @@ public class FornecedorView extends javax.swing.JInternalFrame {
             }
             JOptionPane.showMessageDialog(null, "Gravado com sucesso.");
             atualizarTabelaFornecedor();
+            preparaSalvareCancelar();
         }
     }//GEN-LAST:event_btnGravarActionPerformed
-      
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        preparaSalvareCancelar();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        if (txtCodigo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Selecione um Cliente");
+        } else {
+            fornecedor = new Fornecedor();
+            fornecedor.setCodigoFornecedor(Integer.parseInt(txtCodigo.getText()));
+            int confirma = JOptionPane.showConfirmDialog(null, "Deseja Excluir: " + txtNome.getText());
+            if (confirma == 0){
+                try{
+                    fornecedorDAO.excluir(fornecedor);
+                } catch (SQLException ex){
+                    Logger.getLogger(FornecedorView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                atualizarTabelaFornecedor();
+                preparaExcluir();
+            }
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+   
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        if (txtCodigo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Selecione um Cliente");
+        } else {
+            fornecedor = new Fornecedor();
+            fornecedor.setCodigoFornecedor(Integer.parseInt(txtCodigo.getText()));
+            fornecedor.setNomeFornecedor(txtNome.getText());
+            fornecedor.setEnderecoFornecedor(txtEndereco.getText());
+            fornecedor.setCidadeFornecedor(txtCidade.getText());
+
+            try{
+                fornecedorDAO.excluir(fornecedor);
+            } catch (SQLException ex){
+                Logger.getLogger(FornecedorView.class.getName()).log(Level.SEVERE, null, ex);
+            }   
+            atualizarTabelaFornecedor();
+        }
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
+    public void preparaNovo(){
+        btnNovo.setEnabled(false);
+        btnGravar.setEnabled(true);
+        btnCancelar.setEnabled(true);
+        tblFornecedor.setEnabled(false);
+        tblFornecedor.clearSelection();
+    }
+    
+    public void preparaSalvareCancelar(){
+        btnNovo.setEnabled(true);
+        btnGravar.setEnabled(false);
+        btnCancelar.setEnabled(false);
+        tblFornecedor.setEnabled(true);
+    }
+    
+    public void preparaSelecaoTabela(){
+        btnNovo.setEnabled(true);
+        btnExcluir.setEnabled(true);
+        btnAlterar.setEnabled(true);
+    }
+    
+    public void preparaAlterar(){
+        btnNovo.setEnabled(false);
+        btnExcluir.setEnabled(false);
+        btnAlterar.setEnabled(false);
+        btnGravar.setEnabled(true);
+        btnCancelar.setEnabled(true);
+        tblFornecedor.setEnabled(false);
+        tblFornecedor.clearSelection();
+    }
+    
+    public void preparaExcluir(){
+        btnExcluir.setEnabled(false);
+        btnAlterar.setEnabled(false);
+    }
+    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnCancelar;

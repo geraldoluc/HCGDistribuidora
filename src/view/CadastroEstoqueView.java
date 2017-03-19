@@ -171,6 +171,11 @@ public class CadastroEstoqueView extends javax.swing.JInternalFrame {
         });
 
         btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Fabricante");
 
@@ -213,6 +218,18 @@ public class CadastroEstoqueView extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        //Limpa e desabilita o botão salvar.
+        txtCodigo.setText("");
+        txtDescricao.setText("");
+        txtPrecoVenda.setText("");
+        txtPrecoCusto.setText("");
+        txtFabricante.setText("");
+        radRefrigerante.setEnabled(true);
+        radOutro.setEnabled(true);
+        btnGrupoCategoria.clearSelection();
+    }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         //clicar botao salvar
