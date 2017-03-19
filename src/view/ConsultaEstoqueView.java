@@ -129,14 +129,14 @@ public class ConsultaEstoqueView extends javax.swing.JInternalFrame {
                         .addGroup(pnlConsultaEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addGroup(pnlConsultaEstoqueLayout.createSequentialGroup()
-                                .addGap(33, 33, 33)
+                                .addGap(34, 34, 34)
                                 .addComponent(radRefrigerante)
                                 .addGap(18, 18, 18)
                                 .addComponent(radOutro))))
                     .addGroup(pnlConsultaEstoqueLayout.createSequentialGroup()
-                        .addGap(89, 89, 89)
+                        .addGap(86, 86, 86)
                         .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         pnlConsultaEstoqueLayout.setVerticalGroup(
             pnlConsultaEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,7 +147,7 @@ public class ConsultaEstoqueView extends javax.swing.JInternalFrame {
                     .addComponent(radOutro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(jLabel1))
         );
 
@@ -197,7 +197,7 @@ public class ConsultaEstoqueView extends javax.swing.JInternalFrame {
                 .addComponent(pnlConsultaEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();

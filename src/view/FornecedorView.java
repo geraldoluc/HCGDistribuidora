@@ -193,7 +193,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(51, 51, 51)
+                                .addGap(58, 58, 58)
                                 .addComponent(jLabel4))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -381,8 +381,9 @@ public class FornecedorView extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
-   
+
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        preparaAlterar();
         btnCancelar.setEnabled(false);        
         if (txtCodigo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Selecione um Cliente");
@@ -399,7 +400,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                 Logger.getLogger(FornecedorView.class.getName()).log(Level.SEVERE, null, ex);
             }   
             atualizarTabelaFornecedor();
-        }      
+        }       
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void tblFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFornecedorMouseClicked

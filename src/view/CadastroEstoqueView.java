@@ -48,13 +48,12 @@ public class CadastroEstoqueView extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         txtQuantidade = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
-        jLabel11 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         btnSalvar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         txtFabricante = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
-        jLabel10 = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("Cadastro de Produtos");
@@ -84,8 +83,8 @@ public class CadastroEstoqueView extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Quantidade *");
 
-        jLabel11.setForeground(new java.awt.Color(255, 0, 51));
-        jLabel11.setText("Observação: Itens com * são obrigatórios.");
+        jLabel10.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel10.setText("Observação: Itens com * são obrigatórios.");
 
         javax.swing.GroupLayout pnlCadastroEstoqueLayout = new javax.swing.GroupLayout(pnlCadastroEstoque);
         pnlCadastroEstoque.setLayout(pnlCadastroEstoqueLayout);
@@ -113,7 +112,7 @@ public class CadastroEstoqueView extends javax.swing.JInternalFrame {
                                     .addGroup(pnlCadastroEstoqueLayout.createSequentialGroup()
                                         .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(77, 77, 77)
-                                        .addComponent(jLabel11)
+                                        .addComponent(jLabel10)
                                         .addGap(0, 0, Short.MAX_VALUE))))))
                     .addGroup(pnlCadastroEstoqueLayout.createSequentialGroup()
                         .addGap(33, 33, 33)
@@ -131,7 +130,7 @@ public class CadastroEstoqueView extends javax.swing.JInternalFrame {
                         .addGroup(pnlCadastroEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(301, 301, 301))
+                .addGap(310, 310, 310))
             .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         pnlCadastroEstoqueLayout.setVerticalGroup(
@@ -141,7 +140,7 @@ public class CadastroEstoqueView extends javax.swing.JInternalFrame {
                 .addGroup(pnlCadastroEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
+                    .addComponent(jLabel10))
                 .addGap(18, 18, 18)
                 .addGroup(pnlCadastroEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -187,9 +186,6 @@ public class CadastroEstoqueView extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Fabricante *");
 
-        jLabel10.setForeground(new java.awt.Color(255, 0, 51));
-        jLabel10.setText("Observação: Obrigatorio escolher algum filtro.");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -209,11 +205,6 @@ public class CadastroEstoqueView extends javax.swing.JInternalFrame {
                         .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jSeparator3)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(281, 281, 281)
-                    .addComponent(jLabel10)
-                    .addContainerGap(281, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,11 +221,6 @@ public class CadastroEstoqueView extends javax.swing.JInternalFrame {
                     .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(145, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(278, 278, 278)
-                    .addComponent(jLabel10)
-                    .addContainerGap(279, Short.MAX_VALUE)))
         );
 
         pack();
@@ -298,7 +284,6 @@ public class CadastroEstoqueView extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
