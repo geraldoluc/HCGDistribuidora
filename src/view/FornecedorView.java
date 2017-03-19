@@ -172,6 +172,11 @@ public class FornecedorView extends javax.swing.JInternalFrame {
 
         btnNovo.setText("Novo");
         btnNovo.setPreferredSize(new java.awt.Dimension(75, 30));
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
 
         jLabel4.setForeground(new java.awt.Color(255, 0, 51));
         jLabel4.setText("Observação: Itens com * são obrigatórios.");
@@ -338,6 +343,8 @@ public class FornecedorView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Gravado com sucesso.");
             atualizarTabelaFornecedor();
             preparaSalvareCancelar();
+            desativaCampos();
+            limpaCamposCliente();
             
         } else {
             fornecedor = new Fornecedor();
@@ -356,11 +363,14 @@ public class FornecedorView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Gravado com sucesso.");
             atualizarTabelaFornecedor();
             preparaSalvareCancelar();
+            desativaCampos();
         }
     }//GEN-LAST:event_btnGravarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        limpaCamposCliente();
         preparaSalvareCancelar();
+        desativaCampos();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -376,15 +386,45 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                 } catch (SQLException ex){
                     Logger.getLogger(FornecedorView.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                limpaCamposCliente();
                 atualizarTabelaFornecedor();
                 preparaExcluir();
             }
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
+    public void limpaCamposCliente(){
+        txtCodigo.setText("");
+        txtNome.setText("");
+        txtCNPJ.setText("");
+        txtEndereco.setText("");
+        txtCidade.setText("");
+        txtTelefone.setText("");
+        txtEmail.setText("");
+    }
+    
+    public void ativaCampos(){
+        txtNome.setEnabled(true);
+        txtCNPJ.setEnabled(true);
+        txtEndereco.setEnabled(true);
+        txtCidade.setEnabled(true);
+        txtTelefone.setEnabled(true);
+        txtEmail.setEnabled(true);
+    }
+    
+    public void desativaCampos(){
+        txtNome.setEnabled(false);
+        txtCNPJ.setEnabled(false);
+        txtEndereco.setEnabled(false);
+        txtCidade.setEnabled(false);
+        txtTelefone.setEnabled(false);
+        txtEmail.setEnabled(false);
+    }
+    
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         preparaAlterar();
-        btnCancelar.setEnabled(false);        
+        ativaCampos();
+        
         if (txtCodigo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Selecione um Cliente");
         } else {
@@ -400,8 +440,14 @@ public class FornecedorView extends javax.swing.JInternalFrame {
                 Logger.getLogger(FornecedorView.class.getName()).log(Level.SEVERE, null, ex);
             }   
             atualizarTabelaFornecedor();
-        }       
+        }
     }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        limpaCamposCliente();
+        preparaNovo();
+        ativaCampos();
+    }//GEN-LAST:event_btnNovoActionPerformed
 
     private void tblFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFornecedorMouseClicked
         Fornecedor fornecedor1;
@@ -455,7 +501,7 @@ public class FornecedorView extends javax.swing.JInternalFrame {
         btnExcluir.setEnabled(false);
         btnAlterar.setEnabled(false);
         btnGravar.setEnabled(true);
-        btnCancelar.setEnabled(true);
+        btnCancelar.setEnabled(false);
         tblFornecedor.setEnabled(false);
         tblFornecedor.clearSelection();
     }
