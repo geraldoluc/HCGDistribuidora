@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -90,6 +91,7 @@ public class ConsultaEstoqueView extends javax.swing.JInternalFrame {
         radRefrigerante = new javax.swing.JRadioButton();
         radOutro = new javax.swing.JRadioButton();
         btnConsultar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblConsultaEstoque = new javax.swing.JTable();
 
@@ -107,6 +109,14 @@ public class ConsultaEstoqueView extends javax.swing.JInternalFrame {
         btnConsultar.setMaximumSize(new java.awt.Dimension(90, 35));
         btnConsultar.setMinimumSize(new java.awt.Dimension(90, 35));
         btnConsultar.setPreferredSize(new java.awt.Dimension(90, 35));
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel1.setText("Observação: Obrigatorio escolher algum filtro.");
 
         javax.swing.GroupLayout pnlConsultaEstoqueLayout = new javax.swing.GroupLayout(pnlConsultaEstoque);
         pnlConsultaEstoque.setLayout(pnlConsultaEstoqueLayout);
@@ -116,13 +126,17 @@ public class ConsultaEstoqueView extends javax.swing.JInternalFrame {
                 .addGroup(pnlConsultaEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlConsultaEstoqueLayout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addComponent(radRefrigerante)
-                        .addGap(32, 32, 32)
-                        .addComponent(radOutro))
+                        .addGroup(pnlConsultaEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(pnlConsultaEstoqueLayout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(radRefrigerante)
+                                .addGap(18, 18, 18)
+                                .addComponent(radOutro))))
                     .addGroup(pnlConsultaEstoqueLayout.createSequentialGroup()
-                        .addGap(69, 69, 69)
+                        .addGap(89, 89, 89)
                         .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         pnlConsultaEstoqueLayout.setVerticalGroup(
             pnlConsultaEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,9 +145,10 @@ public class ConsultaEstoqueView extends javax.swing.JInternalFrame {
                 .addGroup(pnlConsultaEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(radRefrigerante)
                     .addComponent(radOutro))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(jLabel1))
         );
 
         tblConsultaEstoque.setModel(new javax.swing.table.DefaultTableModel(
@@ -182,16 +197,29 @@ public class ConsultaEstoqueView extends javax.swing.JInternalFrame {
                 .addComponent(pnlConsultaEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+       if (radRefrigerante.isSelected()){
+           aux = false;
+           atualizarTabelaEstoque();
+       }
+       else if (radOutro.isSelected()){
+           aux = true;
+           atualizarTabelaEstoque();
+       }
+       else
+           JOptionPane.showMessageDialog(null, "Por favor, preencher algum campo.");
+    }//GEN-LAST:event_btnConsultarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConsultar;
     private javax.swing.ButtonGroup btnGrupoFiltro;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pnlConsultaEstoque;
     private javax.swing.JRadioButton radOutro;
